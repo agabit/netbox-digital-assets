@@ -1,0 +1,51 @@
+{% load budget_filters %}
+<div class="card mt-3">
+    <h5 class="card-header">Budget & Procurement</h5>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Project</th>
+                    <th>PROXY #</th>
+                    <th>Type</th>
+                    <th>Total Sum</th>
+                    <th>Tender</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plan in budget_plans %}
+                <tr>
+                    <td>{{ plan.year }}</td>
+                    <td><a href="{{ plan.get_absolute_url }}">{{ plan.project_name }}</a></td>
+                    <td>{{ plan.proxy_number|default:"—" }}</td>
+                    <td>{{ plan.get_budget_type_display }}</td>
+                    <td>{{ plan.total_sum|format_kzt }}</td>
+                    <td>
+                        {% for tender in plan.tenders.all %}
+                            <a href="{{ tender.get_absolute_url }}">{{ tender.tender_name }}</a>
+                            {% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            —
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for tender in plan.tenders.all %}
+                            <span class="badge bg-{{ tender.status_color }} text-white">
+                                {{ tender.get_status_display }}
+                            </span>
+                        {% empty %}
+                            —
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-muted">No budget plans found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

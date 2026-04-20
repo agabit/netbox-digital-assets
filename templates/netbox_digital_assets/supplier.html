@@ -1,0 +1,78 @@
+{% extends 'generic/object.html' %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col col-md-6">
+        <div class="card">
+            <h5 class="card-header">Supplier</h5>
+            <div class="card-body">
+                <table class="table table-hover attr-table">
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{{ object.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Slug</th>
+                        <td>{{ object.slug }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Contact Name</th>
+                        <td>{{ object.contact_name|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Contact Email</th>
+                        <td>{{ object.contact_email|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Contact Phone</th>
+                        <td>{{ object.contact_phone|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Website</th>
+                        <td>
+                            {% if object.website %}
+                                <a href="{{ object.website }}" target="_blank">{{ object.website }}</a>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Description</th>
+                        <td>{{ object.description|default:"—" }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-6">
+        <div class="card">
+            <h5 class="card-header">Contracts</h5>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contract in object.contracts.all %}
+                        <tr>
+                            <td><a href="{{ contract.get_absolute_url }}">{{ contract.number }}</a></td>
+                            <td>{{ contract.name }}</td>
+                            <td>{{ contract.end_date|default:"—" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="text-muted">No contracts found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

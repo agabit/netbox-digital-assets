@@ -1,0 +1,86 @@
+<div class="card mt-3">
+    <h5 class="card-header">Licenses</h5>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Expiry Date</th>
+                    <th>Contract</th>
+                    <th>Tender</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for license in licenses %}
+                <tr>
+                    <td><a href="{{ license.get_absolute_url }}">{{ license.name }}</a></td>
+                    <td>{{ license.quantity }}</td>
+                    <td>{{ license.expiry_date|default:"—" }}</td>
+                    <td>
+                        {% if license.contract %}
+                            <a href="{{ license.contract.get_absolute_url }}">{{ license.contract }}</a>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if license.tender %}
+                            <a href="{{ license.tender.get_absolute_url }}">{{ license.tender }}</a>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-muted">No licenses found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="card mt-3">
+    <h5 class="card-header">Certificates</h5>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Domain</th>
+                    <th>Expiry Date</th>
+                    <th>Contract</th>
+                    <th>Tender</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cert in certificates %}
+                <tr>
+                    <td><a href="{{ cert.get_absolute_url }}">{{ cert.name }}</a></td>
+                    <td>{{ cert.domain }}</td>
+                    <td>{{ cert.expiry_date|default:"—" }}</td>
+                    <td>
+                        {% if cert.contract %}
+                            <a href="{{ cert.contract.get_absolute_url }}">{{ cert.contract }}</a>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if cert.tender %}
+                            <a href="{{ cert.tender.get_absolute_url }}">{{ cert.tender }}</a>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-muted">No certificates found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

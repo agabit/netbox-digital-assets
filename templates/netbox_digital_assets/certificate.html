@@ -1,0 +1,116 @@
+{% extends 'generic/object.html' %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col col-md-6">
+        <div class="card">
+            <h5 class="card-header">Certificate</h5>
+            <div class="card-body">
+                <table class="table table-hover attr-table">
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{{ object.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Domain</th>
+                        <td>{{ object.domain }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Wildcard</th>
+                        <td>
+                            {% if object.wildcard %}
+                                <span class="badge bg-success">Yes</span>
+                            {% else %}
+                                <span class="badge bg-secondary">No</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Start Date</th>
+                        <td>{{ object.start_date|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Expiry Date</th>
+                        <td>{{ object.expiry_date|default:"—" }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Contract</th>
+                        <td>
+                            {% if object.contract %}
+                                <a href="{{ object.contract.get_absolute_url }}">{{ object.contract }}</a>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+			<th scope="row">Tender</th>
+                        <td>
+                            {% if object.tender %}
+                                <a href="{{ object.tender.get_absolute_url }}">{{ object.tender }}</a>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                    </tr>
+                        <th scope="row">Description</th>
+                        <td>{{ object.description|default:"—" }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col col-md-6">
+        <div class="card">
+            <h5 class="card-header">Devices</h5>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Site</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for device in object.devices.all %}
+                        <tr>
+                            <td><a href="{{ device.get_absolute_url }}">{{ device.name }}</a></td>
+                            <td>{{ device.site }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="2" class="text-muted">No devices found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <h5 class="card-header">Virtual Machines</h5>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Cluster</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for vm in object.virtual_machines.all %}
+                        <tr>
+                            <td><a href="{{ vm.get_absolute_url }}">{{ vm.name }}</a></td>
+                            <td>{{ vm.cluster }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="2" class="text-muted">No virtual machines found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
