@@ -15,7 +15,7 @@ class SupplierForm(NetBoxModelForm):
         model = Supplier
         fields = [
             'name', 'slug', 'contact_name', 'contact_email',
-            'contact_phone', 'website', 'description', 'tags',
+            'contact_phone', 'website', 'description', 'comments', 'tags',
         ]
 
 
@@ -35,7 +35,7 @@ class ContractForm(NetBoxModelForm):
         model = Contract
         fields = [
             'name', 'number', 'supplier', 'start_date',
-            'end_date', 'description', 'tags',
+            'end_date', 'description', 'comments', 'tags',
         ]
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date'}),
@@ -74,7 +74,7 @@ class CertificateForm(NetBoxModelForm):
         model = Certificate
         fields = [
             'name', 'domain', 'wildcard', 'start_date', 'expiry_date',
-            'contract', 'tender', 'devices', 'virtual_machines', 'description', 'tags',
+            'contract', 'tender', 'devices', 'virtual_machines', 'description', 'comments', 'tags',
         ]
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date'}),
@@ -114,7 +114,7 @@ class LicenseForm(NetBoxModelForm):
         model = License
         fields = [
             'name', 'license_key', 'quantity', 'start_date', 'expiry_date',
-            'contract', 'tender', 'devices', 'virtual_machines', 'description', 'tags',
+            'contract', 'tender', 'devices', 'virtual_machines', 'description', 'comments', 'tags',
         ]
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date'}),
@@ -141,7 +141,7 @@ class SubscriptionForm(NetBoxModelForm):
         model = Subscription
         fields = [
             'name', 'service_name', 'start_date', 'expiry_date',
-            'contract', 'description', 'tags',
+            'contract', 'description', 'comments', 'tags',
         ]
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date'}),

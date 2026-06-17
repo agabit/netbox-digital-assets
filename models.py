@@ -10,6 +10,7 @@ class Supplier(NetBoxModel):
     contact_phone = models.CharField(max_length=50, blank=True)
     website = models.URLField(blank=True)
     description = models.TextField(blank=True)
+    comments = models.TextField(blank=True, verbose_name='Comments')
 
     class Meta:
         ordering = ['name']
@@ -33,6 +34,7 @@ class Contract(NetBoxModel):
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
     description = models.TextField(blank=True)
+    comments = models.TextField(blank=True, verbose_name='Comments')
 
     class Meta:
         ordering = ['name']
@@ -76,6 +78,7 @@ class Certificate(NetBoxModel):
         related_name='certificates'
     )
     description = models.TextField(blank=True)
+    comments = models.TextField(blank=True, verbose_name='Comments')
 
     class Meta:
         ordering = ['name']
@@ -119,6 +122,7 @@ class License(NetBoxModel):
         related_name='licenses'
     )
     description = models.TextField(blank=True)
+    comments = models.TextField(blank=True, verbose_name='Comments')
 
     class Meta:
         ordering = ['name']
@@ -144,6 +148,7 @@ class Subscription(NetBoxModel):
         related_name='subscriptions'
     )
     description = models.TextField(blank=True)
+    comments = models.TextField(blank=True, verbose_name='Comments')
 
     class Meta:
         ordering = ['name']
