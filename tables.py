@@ -4,7 +4,7 @@ from .models import Supplier, Contract, Certificate, License, Subscription
 
 
 class SupplierTable(NetBoxTable):
-    name = tables.Column(linkify=True)
+    name = tables.LinkColumn(attrs={"a": {"target": "_blank"}})
     contact_name = tables.Column()
     contact_email = tables.Column()
     website = tables.Column()
@@ -19,7 +19,7 @@ class SupplierTable(NetBoxTable):
 
 
 class ContractTable(NetBoxTable):
-    name = tables.Column(linkify=True)
+    name = tables.LinkColumn(attrs={"a": {"target": "_blank"}})
     supplier = tables.Column(linkify=True)
 
     class Meta(NetBoxTable.Meta):
@@ -32,7 +32,7 @@ class ContractTable(NetBoxTable):
 
 
 class CertificateTable(NetBoxTable):
-    name = tables.Column(linkify=True)
+    name = tables.LinkColumn(attrs={"a": {"target": "_blank"}})
     contract = tables.Column(linkify=True)
     wildcard = tables.BooleanColumn()
 
@@ -46,7 +46,7 @@ class CertificateTable(NetBoxTable):
 
 
 class LicenseTable(NetBoxTable):
-    name = tables.Column(linkify=True)
+    name = tables.LinkColumn(attrs={"a": {"target": "_blank"}})
     contract = tables.Column(linkify=True)
 
     class Meta(NetBoxTable.Meta):
@@ -59,7 +59,7 @@ class LicenseTable(NetBoxTable):
 
 
 class SubscriptionTable(NetBoxTable):
-    name = tables.Column(linkify=True)
+    name = tables.LinkColumn(attrs={"a": {"target": "_blank"}})
     contract = tables.Column(linkify=True)
 
     class Meta(NetBoxTable.Meta):
